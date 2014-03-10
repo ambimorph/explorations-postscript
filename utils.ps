@@ -1,0 +1,41 @@
+% utils.ps 
+
+(test.ps) run
+
+/concatenate_strings % (a) (b) -> (ab)  (from http://en.wikibooks.org/wiki/PostScript_FAQ#How_to_concatenate_strings.3F)
+  { exch dup length                 % (b) (a) len(a)
+    2 index length add string       % (b) (a) (\000...) where len == len(a) + len(b)
+    dup dup 4 2 roll copy length    % 
+    4 -1 roll putinterval
+  } bind def
+
+(this ) (and) ( that) concatenate_strings concatenate_strings (this and that) assert_equal
+
+/digit_count
+  { dup 0 eq
+    { 0 pop }
+    { 10 idiv digit_count 1 add}
+    ifelse
+  } def
+
+0 digit_count 0 assert_equal
+9 digit_count 1 assert_equal
+10 digit_count 2 assert_equal
+79 digit_count 2 assert_equal
+845079 digit_count 6 assert_equal
+
+/interleave % a0 a1 ... an b0 b1 ... bn n -> a0 b0 a1 b1 ... an bn
+
+%    { dup length
+%    0 1 3 -1 roll { /i exch def
+%                    4 index i get
+%		    4 index i get
+%		    [3 1 roll]
+%                  } for
+    { 
+    } def
+
+%0 1 interleave 1 eq 0 eq and true assert_equal
+%0 1 2 3 interleave 3 eq 1 eq 2 eq 0 eq and and and true assert_equal
+
+

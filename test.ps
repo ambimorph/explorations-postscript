@@ -1,0 +1,17 @@
+% test.ps
+
+/assert_equal
+
+  % "Assert" should probably mean "stop the program and propagate an
+  % error message", but this will do for now.
+  
+  { 2 copy eq
+    {(test OK\n) print pop pop}
+    {(test failed: ) print (     ) cvs print ( != ) print (     ) cvs print (\n) print }
+    ifelse
+  } def
+
+3 3 assert_equal
+(This should fail:\n) print
+3 5 assert_equal
+
