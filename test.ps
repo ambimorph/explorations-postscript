@@ -15,3 +15,25 @@
 (This should fail:\n) print
 3 5 assert_equal
 
+/list_length_equal
+
+    { [ 3 1 roll ] {length} forall eq
+    } def
+
+[1 2 3] [3 4 5] list_length_equal true assert_equal
+[2 3] [3 4 5] list_length_equal false assert_equal
+
+/list_equal
+    { 2 copy list_length_equal
+      { }
+      { pop pop false }
+      ifelse
+    } def
+
+[0] [0 1] list_equal false assert_equal
+%[1 2 3] [1 2 3] list_equal true assert_equal
+%[1 2 3] [1 4 3] list_equal false assert_equal
+%[1 2 3] [0 2 3] list_equal false assert_equal
+%[1 2 3] [1 2 4] list_equal false assert_equal
+
+

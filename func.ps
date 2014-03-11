@@ -2,41 +2,6 @@
 
 (test.ps) run
 
-/list_length_equal
-
-    { [ 3 1 roll ] {length} forall eq
-    } def
-
-[1 2 3] [3 4 5] list_length_equal true assert_equal
-[2 3] [3 4 5] list_length_equal false assert_equal
-
-/interleave % a0 a1 ... an b0 b1 ... bn n -> a0 b0 a1 b1 ... an bn
-
-%    { dup length
-%    0 1 3 -1 roll { /i exch def
-%                    4 index i get
-%		    4 index i get
-%		    [3 1 roll]
-%                  } for
-    { 
-    } def
-
-%0 1 interleave 1 eq 0 eq and true assert_equal
-%0 1 2 3 interleave 3 eq 1 eq 2 eq 0 eq and and and true assert_equal
-
-/list_equal
-    { 2 copy list_length_equal
-      { }
-      { pop pop false }
-      ifelse
-    } def
-
-[0] [0 1] list_equal false assert_equal
-%[1 2 3] [1 2 3] list_equal true assert_equal
-%[1 2 3] [1 4 3] list_equal false assert_equal
-%[1 2 3] [0 2 3] list_equal false assert_equal
-%[1 2 3] [1 2 4] list_equal false assert_equal
-
 % map is probably going to be based on this:
 [[1 2 3] {2 mul} forall] == %[2 4 6] assert_equal
 
